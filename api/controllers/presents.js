@@ -1,3 +1,5 @@
+const Present = require('../models/present');
+
 exports.presents_get_all = (req, res, next) => {
   Present.find()
     .then((result) => {

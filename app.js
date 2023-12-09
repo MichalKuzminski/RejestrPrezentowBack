@@ -1,5 +1,6 @@
 //import expresa
 const express = require('express');
+const cors = require('cors');
 
 //importuję zmienne środowiskowe
 require('dotenv').config();
@@ -25,12 +26,13 @@ app.use(morgan('combined'));
 //uruchamiam body-parser
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+app.use(cors());
 
 //routy
-// const carRoutes = require('./api/routes/cars');
-// const userRoutes = require('./api/routes/users');
-// app.use('/cars', carRoutes);
-// app.use('/users', userRoutes);
+const presentsRoutes = require('./api/routes/presents');
+const userRoutes = require('./api/routes/users');
+app.use('/presents', presentsRoutes);
+app.use('/users', userRoutes);
 
 app.use((req, res, next) => {
   res.status(404).json({ wiadomosc: 'Nie odnaleziono' });
